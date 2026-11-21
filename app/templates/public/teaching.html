@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "components/_macros.html" import sample_tag, wa_button with context %}
+{% block title %}Classes, subjects and timings, {{ site.name }}{% endblock %}
+{% block description %}Mathematics for classes 6 to 12, offline in {{ site.location }} and online. See classes taught, methodology and tuition timings.{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <h1>Teaching information</h1>
+    <h2>Classes and subject</h2>
+    <p class="lead">Mathematics for classes {{ site.classes }}.</p>
+    <div class="bands">
+      {% for range, name, text in site.class_bands %}<div class="band"><p class="band-range">{{ range }}</p><div><h3>{{ name }}</h3><p>{{ text }}</p></div></div>{% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section tint">
+  <div class="wrap split">
+    <div>
+      <h2>Offline tuition</h2>
+      <p>In person in {{ site.location }}.</p>
+      <p>{{ site.timings[0].days }}, {{ site.timings[0].time }}</p>
+    </div>
+    <div>
+      <h2>Online tuition</h2>
+      <p>Live video classes, available to students anywhere.</p>
+      <p>{{ site.timings[1].days }}, {{ site.timings[1].time }}</p>
+    </div>
+  </div>
+</section>
+<section class="section dark">
+  <div class="wrap">
+    <h2>Methodology {{ sample_tag() }}</h2>
+    <ol class="steps">{% for title, text in site.methodology %}<li><h3>{{ title }}</h3><p>{{ text }}</p></li>{% endfor %}</ol>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap narrow">
+    <h2>Learning support</h2>
+    <p>Students can ask questions in class and by message. Share a doubt on WhatsApp and the teacher will respond when she is available.</p>
+    <p class="actions"><a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a>{{ wa_button() }}</p>
+  </div>
+</section>
+{% endblock %}

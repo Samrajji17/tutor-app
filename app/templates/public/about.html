@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from "components/_macros.html" import sample_tag with context %}
+{% block title %}About {{ site.name }}, mathematics tutor in {{ site.location }}{% endblock %}
+{% block description %}Meet {{ site.name }}, {{ site.qualification }}, teaching mathematics to students of classes 6 to 12 in {{ site.location }} and online.{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap about-grid">
+    <figure class="portrait">
+      <img src="{{ url_for('static', filename='images/' ~ site.photo) }}" width="480" height="600" alt="Portrait of {{ site.name }}" loading="lazy">
+    </figure>
+    <div>
+      <h1>About {{ site.name }}</h1>
+      <p class="lead">{{ site.about.bio }} {{ sample_tag() }}</p>
+      <h2>Qualifications</h2>
+      <p>{{ site.qualification }}</p>
+      <h2>Teaching experience</h2>
+      <p>{{ site.about.experience }} {{ sample_tag() }}</p>
+      <h2>Teaching philosophy</h2>
+      <p>{{ site.about.philosophy }} {{ sample_tag() }}</p>
+      <h2>Achievements</h2>
+      {% if site.about.achievements %}<ul>{% for a in site.about.achievements %}<li>{{ a }}</li>{% endfor %}</ul>
+      {% else %}<p>[Add achievements here] {{ sample_tag() }}</p>{% endif %}
+      <p><a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

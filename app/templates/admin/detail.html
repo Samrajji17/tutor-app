@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+{% from "admin/_status.html" import badge %}
+{% block title %}{{ a.reference }}{% endblock %}
+{% block content %}
+<p><a class="textlink" href="{{ url_for('admin.applications') }}">Back to applications</a></p>
+<div class="row-head"><h1>{{ a.student_name }}</h1>{{ badge(a.status) }}</div>
+<p class="muted">Reference {{ a.reference }}, received {{ a.created_at|localtime }}</p>
+
+<form class="status-form" method="post" action="{{ url_for('admin.update_status', app_id=a.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="status">Change status</label>
+  <select id="status" name="status">{% for s in statuses %}<option value="{{ s }}" {% if a.status == s %}selected{% endif %}>{{ s|capitalize }}</option>{% endfor %}</select>
+  <button class="btn btn-sm" type="submit">Save status</button>
+</form>
+
+<div class="detail-grid">
+  <section><h2>Student</h2><dl class="details">
+    <dt>School</dt><dd>{{ a.school_name }}</dd><dt>Class</dt><dd>{{ a.student_class }}</dd>
+    <dt>Subjects</dt><dd>{{ a.subjects }}</dd><dt>Date of birth</dt><dd>{{ a.date_of_birth or 'Not given' }}</dd>
+    <dt>Gender</dt><dd>{{ a.gender or 'Not given' }}</dd></dl></section>
+  <section><h2>Parent or guardian</h2><dl class="details">
+    <dt>Name</dt><dd>{{ a.parent_name }} ({{ a.relationship }})</dd>
+    <dt>Mobile</dt><dd><a href="tel:+91{{ a.mobile }}">{{ a.mobile }}</a>, <a href="https://wa.me/91{{ a.mobile }}" target="_blank" rel="noopener">WhatsApp</a></dd>
+    <dt>Alternate</dt><dd>{{ a.alt_mobile or 'Not given' }}</dd>
+    <dt>Email</dt><dd>{% if a.email %}<a href="mailto:{{ a.email }}">{{ a.email }}</a>{% else %}Not given{% endif %}</dd></dl></section>
+  <section><h2>Tuition preferences</h2><dl class="details">
+    <dt>Class type</dt><dd>{{ a.mode }}</dd><dt>Days</dt><dd>{{ a.preferred_days or 'No preference' }}</dd>
+    <dt>Time</dt><dd>{{ a.preferred_time or 'No preference' }}</dd><dt>Notes</dt><dd>{{ a.notes or 'None' }}</dd></dl></section>
+</div>
+{% endblock %}

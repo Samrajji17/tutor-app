@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+<h1>Contact messages</h1>
+{% if pagination.items %}
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">Received</th><th scope="col">Name</th><th scope="col">Phone</th><th scope="col">Email</th><th scope="col">Message</th></tr></thead>
+  <tbody>{% for m in pagination.items %}<tr><td>{{ m.created_at|localtime }}</td><td>{{ m.name }}</td><td>{{ m.phone }}</td><td>{{ m.email or '' }}</td><td class="wrap-text">{{ m.message }}</td></tr>{% endfor %}</tbody>
+</table></div>
+<nav class="pager"><p>Page {{ pagination.page }} of {{ pagination.pages or 1 }}</p><p>
+  {% if pagination.has_prev %}<a class="btn btn-sm btn-ghost" href="{{ url_for('admin.messages', page=pagination.prev_num) }}">Previous</a>{% endif %}
+  {% if pagination.has_next %}<a class="btn btn-sm btn-ghost" href="{{ url_for('admin.messages', page=pagination.next_num) }}">Next</a>{% endif %}</p></nav>
+{% else %}<p class="empty">No messages yet.</p>{% endif %}
+{% endblock %}

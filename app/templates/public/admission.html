@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% from "components/_macros.html" import field, choices with context %}
+{% block title %}Apply for admission, {{ site.name }}{% endblock %}
+{% block description %}Apply online for mathematics tuition with {{ site.name }}. Fill in student and parent details and receive an application reference number.{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap form-wrap">
+    <h1>Apply for admission</h1>
+    <p class="lead">Tell us about the student. Fields marked <span class="req">*</span> are required. The teacher will contact you on the mobile number you give.</p>
+    <form method="post" action="{{ url_for('admission.apply') }}" class="form" data-once>
+      {{ form.hidden_tag() }}
+      <fieldset class="group">
+        <legend>Student</legend>
+        {{ field(form.student_name, autocomplete="off") }}
+        <div class="two">
+          {{ field(form.student_class) }}
+          {{ field(form.school_name, autocomplete="off") }}
+        </div>
+        {{ choices(form.subjects) }}
+        <div class="two">
+          {{ field(form.date_of_birth) }}
+          {{ field(form.gender) }}
+        </div>
+      </fieldset>
+      <fieldset class="group">
+        <legend>Parent or guardian</legend>
+        <div class="two">
+          {{ field(form.parent_name, autocomplete="name") }}
+          {{ field(form.relationship) }}
+        </div>
+        <div class="two">
+          {{ field(form.mobile, type="tel", inputmode="numeric", autocomplete="tel", placeholder="10-digit mobile number") }}
+          {{ field(form.alt_mobile, type="tel", inputmode="numeric", autocomplete="off") }}
+        </div>
+        {{ field(form.email, type="email", autocomplete="email") }}
+      </fieldset>
+      <fieldset class="group">
+        <legend>Tuition preferences</legend>
+        {{ choices(form.mode) }}
+        {{ choices(form.preferred_days) }}
+        {{ field(form.preferred_time) }}
+        {{ field(form.notes, rows="4") }}
+      </fieldset>
+      <div class="hp" aria-hidden="true">{{ form.website.label }} {{ form.website(tabindex="-1", autocomplete="off") }}</div>
+      <button class="btn btn-lg" type="submit">Submit application</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

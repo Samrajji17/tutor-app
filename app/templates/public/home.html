@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% from "components/_macros.html" import sample_tag, wa_button with context %}
+{% block title %}{{ site.name }}, mathematics tuition for classes 6 to 12 in {{ site.location }}{% endblock %}
+{% block head %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org", "@type": "Person", "name": site.name,
+  "jobTitle": "Mathematics tutor", "description": "Mathematics tuition for classes 6 to 12",
+  "address": {"@type": "PostalAddress", "addressLocality": site.location, "addressCountry": "IN"},
+  "telephone": site.phone_tel, "url": canonical_url } | tojson }}</script>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <svg class="hero-graph" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <defs><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="currentColor" stroke-width=".6"/></pattern></defs>
+    <rect width="600" height="420" fill="url(#grid)"/>
+    <path d="M0 300H600M300 0V420" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <path class="curve" d="M30 40C120 360 220 380 300 300S480 10 580 60" fill="none"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-kicker">{{ site.name }}, {{ site.qualification }}</p>
+      <h1>Mathematics, taught until it makes sense.</h1>
+      <p class="lead">Personal tuition for classes {{ site.classes }}. Learn in person in {{ site.location }} or join live online.</p>
+      <div class="actions">
+        <a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a>
+        {{ wa_button("Contact on WhatsApp") }}
+      </div>
+    </div>
+    <figure class="portrait">
+      <img src="{{ url_for('static', filename='images/' ~ site.photo) }}" width="480" height="600" alt="{{ site.name }}, mathematics tutor" fetchpriority="high">
+      <figcaption>{{ site.name }}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Why families choose this tuition</h2>
+    <ul class="ruled">
+      {% for title, text in site.highlights %}<li><h3>{{ title }}</h3><p>{{ text }}</p></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <h2>Classes and subjects</h2>
+    <p class="lead">Mathematics, from class 6 through class 12.</p>
+    <div class="bands">
+      {% for range, name, text in site.class_bands %}
+      <div class="band"><p class="band-range">{{ range }}</p><div><h3>{{ name }}</h3><p>{{ text }}</p></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <h2>Offline in {{ site.location }}</h2>
+      <p>Sit-down classes close to home, with the teacher's full attention on the board and on your child's notebook.</p>
+    </div>
+    <div>
+      <h2>Online from anywhere</h2>
+      <p>Live video classes with the same lessons and practice, for families who cannot travel.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <dl class="timings">
+      {% for t in site.timings %}<div><dt>{{ t.mode }}, {{ t.place }}</dt><dd>{{ t.days }}, {{ t.time }}</dd></div>{% endfor %}
+    </dl>
+    <p><a class="textlink" href="{{ url_for('public.teaching') }}">See full teaching details</a></p>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <h2>How lessons work {{ sample_tag() }}</h2>
+    <ol class="steps">
+      {% for title, text in site.methodology %}<li><h3>{{ title }}</h3><p>{{ text }}</p></li>{% endfor %}
+    </ol>
+  </div>
+</section>
+
+{% if site.testimonials %}
+<section class="section">
+  <div class="wrap narrow">
+    <h2>What parents and students say</h2>
+    {% for t in site.testimonials %}
+    <blockquote class="quote">
+      <p>{{ t.quote }}</p>
+      <footer>{{ t.name }}, {{ t.detail }} {% if t.sample %}{{ sample_tag() }}{% endif %}</footer>
+    </blockquote>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="section tint">
+  <div class="wrap narrow">
+    <h2>Questions parents ask</h2>
+    <div class="faq">
+      {% for q, a in site.faqs %}<details><summary>{{ q }}</summary><p>{{ a }}</p></details>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <h2>Ready to start?</h2>
+      <p class="lead">Send the admission form. It takes about three minutes.</p>
+      <p><a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a></p>
+    </div>
+    <div>
+      <h2>Or talk first</h2>
+      <p><a href="tel:{{ site.phone_tel }}">{{ site.phone }}</a>{% if site.email %}<br><a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}<br>{{ site.address }}</p>
+      <p>{{ wa_button() }}</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

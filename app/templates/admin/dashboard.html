@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+{% from "admin/_status.html" import badge %}
+{% block title %}Overview{% endblock %}
+{% block content %}
+<h1>Overview</h1>
+<dl class="stats">
+  <div><dt>Total applications</dt><dd>{{ total }}</dd></div>
+  <div><dt>New, not yet contacted</dt><dd>{{ new }}</dd></div>
+  <div><dt>Received this month</dt><dd>{{ month }}</dd></div>
+</dl>
+<div class="row-head"><h2>Recent submissions</h2><a class="textlink" href="{{ url_for('admin.applications') }}">View all applications</a></div>
+{% if recent %}
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">Received</th><th scope="col">Student</th><th scope="col">Class</th><th scope="col">Mode</th><th scope="col">Status</th></tr></thead>
+  <tbody>{% for a in recent %}
+    <tr><td>{{ a.created_at|localtime }}</td><td><a href="{{ url_for('admin.detail', app_id=a.id) }}">{{ a.student_name }}</a></td><td>{{ a.student_class }}</td><td>{{ a.mode }}</td><td>{{ badge(a.status) }}</td></tr>
+  {% endfor %}</tbody>
+</table></div>
+{% else %}<p class="empty">No applications yet. They will appear here when a parent submits the admission form.</p>{% endif %}
+{% endblock %}

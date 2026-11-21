@@ -1,0 +1,67 @@
+{% from "components/_macros.html" import wa_icon, wa_button with context %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site.name }}, mathematics tuition in {{ site.location }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}Mathematics tuition for classes 6 to 12 with {{ site.name }} ({{ site.qualification }}) in {{ site.location }} and online. Apply for admission online.{% endblock %}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}, mathematics tuition">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if site.og_image %}<meta property="og:image" content="{{ base_url }}{{ url_for('static', filename='images/' ~ site.og_image) }}">{% endif %}
+  <meta name="theme-color" content="#1F3D33">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{{ url_for('public.home') }}"><span class="brand-name">{{ site.name }}</span><span class="brand-sub">Mathematics tuition</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      {% set here = request.endpoint %}
+      <a href="{{ url_for('public.home') }}" {% if here == 'public.home' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ url_for('public.about') }}" {% if here == 'public.about' %}aria-current="page"{% endif %}>About</a>
+      <a href="{{ url_for('public.teaching') }}" {% if here == 'public.teaching' %}aria-current="page"{% endif %}>Teaching</a>
+      <a href="{{ url_for('public.contact') }}" {% if here == 'public.contact' %}aria-current="page"{% endif %}>Contact</a>
+      <a class="btn btn-sm" href="{{ url_for('admission.apply') }}">Apply for admission</a>
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}<div class="wrap flashes">{% for cat, msg in messages %}<p class="flash flash-{{ cat }}" role="{{ 'alert' if cat == 'error' else 'status' }}">{{ msg }}</p>{% endfor %}</div>{% endif %}
+{% endwith %}
+
+<main id="main">{% block content %}{% endblock %}</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-name">{{ site.name }}</p>
+      <p>{{ site.qualification }}<br>Mathematics for classes {{ site.classes }}<br>{{ site.address }} and online</p>
+    </div>
+    <div>
+      <p class="foot-head">Pages</p>
+      <p><a href="{{ url_for('public.about') }}">About</a><br><a href="{{ url_for('public.teaching') }}">Teaching</a><br><a href="{{ url_for('admission.apply') }}">Admission</a><br><a href="{{ url_for('public.contact') }}">Contact</a></p>
+    </div>
+    <div>
+      <p class="foot-head">Get in touch</p>
+      <p><a href="tel:{{ site.phone_tel }}">{{ site.phone }}</a>{% if site.email %}<br><a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}</p>
+      <p>{{ wa_button("Chat on WhatsApp", class_="btn btn-wa btn-sm") }}</p>
+      {% if site.social %}<p>{% for label, url in site.social.items() %}<a href="{{ url }}" rel="noopener me" target="_blank">{{ label }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+    </div>
+  </div>
+  <p class="wrap legal">&copy; {{ now_year }} {{ site.name }}</p>
+</footer>
+
+<a class="wa-float" href="{{ wa_link() }}" target="_blank" rel="noopener" aria-label="Chat with {{ site.name }} on WhatsApp">{{ wa_icon() }}</a>
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>

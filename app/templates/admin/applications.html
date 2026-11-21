@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% from "admin/_status.html" import badge %}
+{% block title %}Applications{% endblock %}
+{% block content %}
+<div class="row-head"><h1>Applications</h1>
+  <a class="btn btn-sm btn-ghost" href="{{ url_for('admin.export_csv', **query_args) }}">Export CSV{% if query_args %} (filtered){% endif %}</a></div>
+<form class="filters" method="get" action="{{ url_for('admin.applications') }}">
+  <label>Student name<input type="search" name="q" value="{{ filters.q }}" maxlength="100"></label>
+  <label>Class<select name="cls"><option value="">All</option>{% for v, l in class_choices %}<option value="{{ v }}" {% if filters.cls == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select></label>
+  <label>Status<select name="status"><option value="">All</option>{% for s in statuses %}<option value="{{ s }}" {% if filters.status == s %}selected{% endif %}>{{ s|capitalize }}</option>{% endfor %}</select></label>
+  <label>From<input type="date" name="date_from" value="{{ filters.date_from }}"></label>
+  <label>To<input type="date" name="date_to" value="{{ filters.date_to }}"></label>
+  <div class="filter-actions"><button class="btn btn-sm" type="submit">Apply filters</button>{% if query_args %}<a class="textlink" href="{{ url_for('admin.applications') }}">Clear</a>{% endif %}</div>
+</form>
+
+{% if pagination.items %}
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">Reference</th><th scope="col">Received</th><th scope="col">Student</th><th scope="col">Class</th><th scope="col">Mobile</th><th scope="col">Mode</th><th scope="col">Status</th></tr></thead>
+  <tbody>{% for a in pagination.items %}
+    <tr><td><a href="{{ url_for('admin.detail', app_id=a.id) }}">{{ a.reference }}</a></td><td>{{ a.created_at|localtime }}</td><td>{{ a.student_name }}</td><td>{{ a.student_class }}</td><td>{{ a.mobile }}</td><td>{{ a.mode }}</td><td>{{ badge(a.status) }}</td></tr>
+  {% endfor %}</tbody>
+</table></div>
+<nav class="pager" aria-label="Pages">
+  <p>{{ pagination.total }} application{{ '' if pagination.total == 1 else 's' }}, page {{ pagination.page }} of {{ pagination.pages or 1 }}</p>
+  <p>
+    {% if pagination.has_prev %}<a class="btn btn-sm btn-ghost" href="{{ url_for('admin.applications', page=pagination.prev_num, **query_args) }}">Previous</a>{% endif %}
+    {% if pagination.has_next %}<a class="btn btn-sm btn-ghost" href="{{ url_for('admin.applications', page=pagination.next_num, **query_args) }}">Next</a>{% endif %}
+  </p>
+</nav>
+{% else %}<p class="empty">{% if query_args %}No applications match these filters. Try clearing them.{% else %}No applications yet.{% endif %}</p>{% endif %}
+{% endblock %}

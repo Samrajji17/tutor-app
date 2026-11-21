@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "components/_macros.html" import field, wa_button with context %}
+{% block title %}Contact {{ site.name }}, mathematics tuition in {{ site.location }}{% endblock %}
+{% block description %}Phone, WhatsApp, email and location for {{ site.name }}'s mathematics tuition in {{ site.location }}. Send a message or apply for admission.{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <h1>Contact</h1>
+      <dl class="details">
+        <dt>Phone</dt><dd><a href="tel:{{ site.phone_tel }}">{{ site.phone }}</a></dd>
+        <dt>WhatsApp</dt><dd>{{ wa_button("Chat on WhatsApp", class_="btn btn-wa btn-sm") }}</dd>
+        {% if site.email %}<dt>Email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd>{% endif %}
+        <dt>Location</dt><dd>{{ site.address }}{% if site.maps_url %}<br><a href="{{ site.maps_url }}" target="_blank" rel="noopener">Open in Google Maps</a>{% endif %}</dd>
+      </dl>
+    </div>
+    <div id="contact-form">
+      <h2>Send a message</h2>
+      <form method="post" action="{{ url_for('public.contact') }}" class="form" data-once>
+        {{ form.hidden_tag() }}
+        {{ field(form.name, autocomplete="name") }}
+        {{ field(form.phone, type="tel", inputmode="numeric", autocomplete="tel") }}
+        {{ field(form.email, type="email", autocomplete="email") }}
+        {{ field(form.message, rows="5") }}
+        <div class="hp" aria-hidden="true">{{ form.website.label }} {{ form.website(tabindex="-1", autocomplete="off") }}</div>
+        <button class="btn" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
