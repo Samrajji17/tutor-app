@@ -7,7 +7,10 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
-(BASE_DIR / "instance").mkdir(exist_ok=True)
+try:
+    (BASE_DIR / "instance").mkdir(exist_ok=True)
+except OSError:
+    pass
 
 
 def env_bool(name, default=False):
@@ -61,7 +64,7 @@ class Config:
     MAIL_USE_SSL = env_bool("MAIL_USE_SSL", False)
     MAIL_SENDER = os.environ.get("MAIL_SENDER", "").strip()
     NOTIFY_EMAIL = os.environ.get("NOTIFY_EMAIL", "").strip()
-    MAIL_ASYNC = True
+    MAIL_ASYNC = not os.environ.get("VERCEL")
 
 
 class TestConfig(Config):
