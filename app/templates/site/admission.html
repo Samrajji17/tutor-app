@@ -37,8 +37,7 @@
       <fieldset class="group">
         <legend>Tuition preferences</legend>
         {{ choices(form.mode) }}
-        {{ choices(form.preferred_days) }}
-        {{ field(form.preferred_time) }}
+        <!-- <p id="schedule" class="schedule" aria-live="polite"{% for t in site.timings %} data-{{ t.mode|lower }}="{{ t.days }}, {{ t.time }}"{% endfor %}>Choose a class type to see the days and timing.</p> -->
         {{ field(form.notes, rows="4") }}
       </fieldset>
       <div class="hp" aria-hidden="true">{{ form.website.label }} {{ form.website(tabindex="-1", autocomplete="off") }}</div>

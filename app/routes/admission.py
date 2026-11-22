@@ -4,7 +4,7 @@ from datetime import timedelta
 from flask import (Blueprint, current_app, flash, redirect, render_template, request,
                    session, url_for)
 from sqlalchemy import func
-
+from ..content import load_site
 from ..extensions import db
 from ..forms.admission import AdmissionForm
 from ..models import Application
@@ -39,6 +39,9 @@ def apply():
         return render_template("site/admission.html", form=form)
 
     mobile = clean_phone(form.mobile.data)
+
+    timing = next((t for t in load_site()["timings"] if t["mode"] == form.mode.data), None)
+    schedule = f'{timing["days"]}, {timing["time"]}'[:120] if timing else None
     # Prevent duplicates from double taps or refreshes: same student + number within 24 hours.
     existing = Application.query.filter(
         func.lower(Application.student_name) == form.student_name.data.lower(),
@@ -63,8 +66,7 @@ def apply():
         alt_mobile=clean_phone(form.alt_mobile.data) or None,
         email=form.email.data or None,
         mode=form.mode.data,
-        preferred_days=", ".join(form.preferred_days.data) or None,
-        preferred_time=form.preferred_time.data or None,
+        preferred_days=schedule,
         notes=form.notes.data or None,
     )
     db.session.add(application)

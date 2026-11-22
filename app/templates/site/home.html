@@ -21,7 +21,11 @@
     <div class="hero-copy">
       <p class="hero-kicker">{{ site.name }}, {{ site.qualification }}</p>
       <h1>Mathematics, taught until it makes sense.</h1>
-      <p class="lead">Personal tuition for classes {{ site.classes }}. Learn in person in {{ site.location }} or join live online.</p>
+
+      <h3>THINK CLEARLY, UNDERSTAND DEEPLY, SOLVE CONFIDENTLY</h3>
+      <p class="lead">Develop a strong understanding of mathematics 
+        through structured lessons, 
+        guided practice and clear explanations in a focused, small-batch learning environment.</p>
       <div class="actions">
         <a class="btn" href="{{ url_for('admission.apply') }}">Register for classes</a>
         {{ wa_button("Contact on WhatsApp") }}
@@ -36,7 +40,7 @@
 
 <section class="section">
   <div class="wrap">
-    <h2>Why families choose this tuition</h2>
+    <h2>What makes our classes different</h2>
     <ul class="ruled">
       {% for title, text in site.highlights %}<li><h3>{{ title }}</h3><p>{{ text }}</p></li>{% endfor %}
     </ul>
@@ -76,7 +80,7 @@
 
 <section class="section dark">
   <div class="wrap">
-    <h2>How lessons work {{ sample_tag() }}</h2>
+    <h2>A structured Approach to learning{{ sample_tag() }}</h2>
     <ol class="steps">
       {% for title, text in site.methodology %}<li><h3>{{ title }}</h3><p>{{ text }}</p></li>{% endfor %}
     </ol>

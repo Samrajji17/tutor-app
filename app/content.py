@@ -13,15 +13,22 @@ PLACEHOLDER = "[Add details]"
 
 # TODO(teacher): replace with real tuition timings, e.g. {"days": "Mon, Wed, Fri", "time": "5:00 pm to 7:00 pm"}
 TIMINGS = [
-    {"mode": "Offline", "place": "Vengadamangalam", "days": "[Add days]", "time": "[Add timing]"},
-    {"mode": "Online", "place": "Live video classes", "days": "[Add days]", "time": "[Add timing]"},
+    {"mode": "Offline", "place": "Vengadamangalam", "days": "[Monday, Wednesday, Friday]", "time": "Evenings, 6:00 pm to 8:00 pm"},
+    {"mode": "Online", "place": "Live video classes", "days": "[Tuesday, Thursday, Saturday]", "time": "Evenings, 6:00 pm to 8:00 pm"},
 ]
 
+FEES = {
+    "classes": ["Class 10", "Class 11", "Class 12"],
+    "rows": [
+        ("Offline", ["₹250*", "₹300", "₹350"]),
+        ("Online", ["₹200", "₹250", "₹300"]),
+    ]
+    }
+
 HIGHLIGHTS = [
-    ("M.Sc. Mathematics", "A postgraduate qualification in the subject she teaches."),
-    ("Classes 10 to 12", "From middle-school foundations to higher-secondary preparation."),
-    ("In person and online", "Classes in Vengadamangalam, or live online from anywhere."),
-    ("Easy to reach", "Ask a question on WhatsApp or send the admission form any time."),
+    ("M.Sc. Mathematics", "Subject expertise backed by postgraduate qualification, Teaching experience, Strong teaching philosophy."),
+    ("Small-batch learning", "A focused learning environment with up to 10 students per batch."),
+    (" Online & Offline Options", "Students can choose between Online classes or In-person classes."),
 ]
 
 CLASS_BANDS = [
@@ -56,9 +63,9 @@ FAQS = [
 
 ABOUT = {
     "bio": """I am Jancy T, a postgraduate in Mathematics (M.Sc. Mathematics), with a background in school teaching and private tutoring.
-            I teaches Mathematics to students of Classes 10, 11 and 12 across CBSE, ICSE and State Board curriculam, in both English and Tamil.
+            I teach Mathematics to students of Classes 10, 11 and 12 across CBSE, ICSE and State Board curriculum, in both English and Tamil.
             For me, teaching mathematics is about making sense of what once seemed difficult.
-            I focuses on connecting conceptual understanding with examination-oriented practice through structured lessons and customised worksheets, 
+            I focus on connecting conceptual understanding with examination-oriented practice through structured lessons and customised worksheets, 
             helping students understand the logic behind concepts and apply them with clarity.
             """,
     "experience": "Five years of experience in private tutoring, teaching mathematics to students across multiple curriculums with a focus on school-level learning and examination preparation.",
@@ -96,6 +103,7 @@ def load_site():
         }.items() if v},
         "show_sample": _env("SHOW_SAMPLE_TAGS", "1") not in {"0", "false", "no"},
         "timings": TIMINGS,
+        "fees": FEES,
         "highlights": HIGHLIGHTS,
         "class_bands": CLASS_BANDS,
         "methodology": METHODOLOGY,

@@ -26,6 +26,25 @@
       <p>{{ site.timings[1].days }}, {{ site.timings[1].time }}</p>
     </div>
   </div>
+   </div>
+  <div class="wrap">
+    <h2 class="fees-title">Fees</h3>
+    <div class="fees-wrap">
+      <table class="fees">
+        <thead>
+          <tr><th scope="col">Mode</th>{% for c in site.fees.classes %}<th scope="col">{{ c }}</th>{% endfor %}</tr>
+        </thead>
+        <tbody>
+          {% for mode, prices in site.fees.rows %}
+          <tr><th scope="row">{{ mode }}</th>{% for p in prices %}<td>{{ p }}</td>{% endfor %}</tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="fees-note">{{ site.fees.note }}</p>
+  </div>
+
+
 </section>
 <section class="section dark">
   <div class="wrap">

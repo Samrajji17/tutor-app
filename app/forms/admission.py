@@ -11,8 +11,7 @@ from ..utils import clean_phone
 
 CLASS_CHOICES = [("", "Select class")] + [(str(n), f"Class {n}") for n in range(6, 13)]
 DAY_CHOICES = [(d, d) for d in ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")]
-TIME_CHOICES = [("", "No preference"), ("Morning", "Morning"), ("Afternoon", "Afternoon"),
-                ("Evening", "Evening")]
+TIME_CHOICES = [("", "No preference"), ("Evening", "Evening")]
 MODE_CHOICES = [("Offline", "Offline (in person)"), ("Online", "Online")]
 GENDER_CHOICES = [("", "Prefer not to say"), ("Female", "Female"), ("Male", "Male"), ("Other", "Other")]
 RELATION_CHOICES = [("", "Select relationship"), ("Mother", "Mother"), ("Father", "Father"),
@@ -57,8 +56,6 @@ class AdmissionForm(FlaskForm):
     # Preferences
     mode = RadioField("Class type", choices=MODE_CHOICES,
                       validators=[DataRequired(message="Choose online or offline.")])
-    preferred_days = MultiCheckboxField("Preferred days", choices=DAY_CHOICES, validators=[Optional()])
-    preferred_time = SelectField("Preferred time", choices=TIME_CHOICES, validators=[Optional()])
     notes = TextAreaField("Anything else we should know?", filters=[_strip],
                           validators=[Optional(), Length(max=1000)])
     # Honeypot: real visitors never see or fill this.

@@ -24,7 +24,8 @@
     <dt>Alternate</dt><dd>{{ a.alt_mobile or 'Not given' }}</dd>
     <dt>Email</dt><dd>{% if a.email %}<a href="mailto:{{ a.email }}">{{ a.email }}</a>{% else %}Not given{% endif %}</dd></dl></section>
   <section><h2>Tuition preferences</h2><dl class="details">
-    <dt>Class type</dt><dd>{{ a.mode }}</dd><dt>Days</dt><dd>{{ a.preferred_days or 'No preference' }}</dd>
-    <dt>Time</dt><dd>{{ a.preferred_time or 'No preference' }}</dd><dt>Notes</dt><dd>{{ a.notes or 'None' }}</dd></dl></section>
+    <dt>Class type</dt><dd>{{ a.mode }}</dd>
+    <dt>Schedule</dt><dd>{{ a.preferred_days or 'Not given' }}</dd>
+    <dt>Notes</dt><dd>{{ a.notes or 'None' }}</dd></dl></section>
 </div>
 {% endblock %}

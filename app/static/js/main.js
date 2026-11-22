@@ -18,3 +18,15 @@
     form.addEventListener('input', function (e) { e.target.removeAttribute('aria-invalid'); });
   });
 })();
+
+  // Admission form: show the fixed days and timing for the chosen class type
+  var schedule = document.getElementById('schedule');
+  if (schedule) {
+    var showSchedule = function () {
+      var chosen = document.querySelector('input[name="mode"]:checked');
+      var text = chosen && schedule.getAttribute('data-' + chosen.value.toLowerCase());
+      if (text) { schedule.textContent = chosen.value + ' classes: ' + text; schedule.classList.add('on'); }
+    };
+    document.querySelectorAll('input[name="mode"]').forEach(function (r) { r.addEventListener('change', showSchedule); });
+    showSchedule();
+  }
