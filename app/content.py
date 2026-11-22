@@ -19,23 +19,22 @@ TIMINGS = [
 
 HIGHLIGHTS = [
     ("M.Sc. Mathematics", "A postgraduate qualification in the subject she teaches."),
-    ("Classes 6 to 12", "From middle-school foundations to higher-secondary preparation."),
+    ("Classes 10 to 12", "From middle-school foundations to higher-secondary preparation."),
     ("In person and online", "Classes in Vengadamangalam, or live online from anywhere."),
     ("Easy to reach", "Ask a question on WhatsApp or send the admission form any time."),
 ]
 
 CLASS_BANDS = [
-    ("6 to 8", "Foundation years", "Building number sense, confidence and the habit of showing working."),
-    ("9 and 10", "Secondary school", "Algebra, geometry and the problem-solving that board exams reward."),
-    ("11 and 12", "Higher secondary", "Deeper concepts and steady preparation for the final exams."),
+    ("10", "Strengthening fundamentals and applications", "Build conceptual clarity.Analytical skills. Examination-oriented problem-solving skills."),
+    ("11 & 12", "Advanced concepts and examination preparation", "Master higher-level mathematical concepts. Strengthen application skills. Prepare systematically for examinations"),
 ]
 
 # sample: True -> shows a "Sample" tag. Rewrite these in the teacher's own words.
 METHODOLOGY = [
-    ("Understand the idea", "Each topic starts from why it works, not only how to do it."),
-    ("Practise with guidance", "Worked examples first, then problems the student tries independently."),
-    ("Correct and revisit", "Mistakes are explained and revisited until the method is clear."),
-    ("Prepare for tests", "Regular revision and exam-style questions close each unit."),
+    ("Conceptual understanding", "Introduce each concept with clear explanations and examples, helping students understand the logic behind mathematical methods."),
+    ("Guided practice", "Work through problems step by step before encouraging students to solve similar questions independently."),
+    ("Doubt clarification", "Encourage students to ask questions, revisit challenging concepts and learn from their mistakes."),
+    ("Revision and assessment", "Use appropriate revision practice, questions and exam-style problems to reinforce learning and assess understanding."),
 ]
 
 TESTIMONIALS = [
@@ -48,7 +47,7 @@ TESTIMONIALS = [
 ]
 
 FAQS = [
-    ("Which classes and subjects are taught?", "Mathematics for classes 6 to 12."),
+    ("Which classes and subjects are taught?", "Mathematics for classes 10 to 12."),
     ("Are classes online or in person?", "Both. Choose offline in Vengadamangalam or online when you apply."),
     ("How do I apply?", "Fill in the admission form. You will get a reference number, and the teacher will contact you on the mobile number you give."),
     ("What about fees and batch timings?", "These are shared directly by the teacher. Ask on WhatsApp or mention it in the form."),
@@ -56,10 +55,15 @@ FAQS = [
 ]
 
 ABOUT = {
-    "bio": "[Sample. Write a short introduction in the first person or third person: who Jancy T is, what she enjoys about teaching mathematics, and who she teaches.]",
-    "experience": "[Add years of experience and where she has taught.]",
-    "philosophy": "[Sample. Write her teaching philosophy in two or three sentences.]",
-    "achievements": [],  # e.g. ["Rank holder, University of ..."]. Add only real achievements.
+    "bio": """I am Jancy T, a postgraduate in Mathematics (M.Sc. Mathematics), with a background in school teaching and private tutoring.
+            I teaches Mathematics to students of Classes 10, 11 and 12 across CBSE, ICSE and State Board curriculam, in both English and Tamil.
+            For me, teaching mathematics is about making sense of what once seemed difficult.
+            I focuses on connecting conceptual understanding with examination-oriented practice through structured lessons and customised worksheets, 
+            helping students understand the logic behind concepts and apply them with clarity.
+            """,
+    "experience": "Five years of experience in private tutoring, teaching mathematics to students across multiple curriculums with a focus on school-level learning and examination preparation.",
+    "philosophy": "Mathematics is not just hard; the way it is taught matters.",
+    "achievements": ["Completed an academic project in Mathematical Education as part of postgraduate studies in Mathematics."],  # e.g. ["Rank holder, University of ..."]. Add only real achievements.
 }
 
 
@@ -74,7 +78,7 @@ def load_site():
         "name": name,
         "first_name": name.split()[0],
         "qualification": "M.Sc. Mathematics",
-        "classes": "6th to 12th",
+        "classes": "10th to 12th",
         "subjects": ["Mathematics"],
         "location": "Vengadamangalam",
         "address": _env("TEACHER_ADDRESS", "Vengadamangalam"),

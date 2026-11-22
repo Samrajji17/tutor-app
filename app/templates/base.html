@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{{ site.name }}, mathematics tuition in {{ site.location }}{% endblock %}</title>
-  <meta name="description" content="{% block description %}Mathematics tuition for classes 6 to 12 with {{ site.name }} ({{ site.qualification }}) in {{ site.location }} and online. Apply for admission online.{% endblock %}">
+  <meta name="description" content="{% block description %}Mathematics tuition for classes 6 to 12 with {{ site.name }} ({{ site.qualification }}) in {{ site.location }} and online. Register for classes online.{% endblock %}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.name }}, mathematics tuition">
@@ -30,7 +30,7 @@
       <a href="{{ url_for('public.about') }}" {% if here == 'public.about' %}aria-current="page"{% endif %}>About</a>
       <a href="{{ url_for('public.teaching') }}" {% if here == 'public.teaching' %}aria-current="page"{% endif %}>Teaching</a>
       <a href="{{ url_for('public.contact') }}" {% if here == 'public.contact' %}aria-current="page"{% endif %}>Contact</a>
-      <a class="btn btn-sm" href="{{ url_for('admission.apply') }}">Apply for admission</a>
+      <a class="btn btn-sm" href="{{ url_for('admission.apply') }}">Register for classes</a>
     </nav>
   </div>
 </header>
@@ -45,7 +45,7 @@
   <div class="wrap foot-grid">
     <div>
       <p class="foot-name">{{ site.name }}</p>
-      <p>{{ site.qualification }}<br>Mathematics for classes {{ site.classes }}<br>{{ site.address }} and online</p>
+      <p>{{ site.qualification }}<br>Mathematics for classes {{ site.classes }}<br>online & offline/ small batch learning {{ site.location }}</p>
     </div>
     <div>
       <p class="foot-head">Pages</p>

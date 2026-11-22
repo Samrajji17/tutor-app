@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% from "components/_macros.html" import field, choices with context %}
-{% block title %}Apply for admission, {{ site.name }}{% endblock %}
+{% block title %}Register for classes, {{ site.name }}{% endblock %}
 {% block description %}Apply online for mathematics tuition with {{ site.name }}. Fill in student and parent details and receive an application reference number.{% endblock %}
 {% block content %}
 <section class="section">
   <div class="wrap form-wrap">
-    <h1>Apply for admission</h1>
+    <h1>Register for classes</h1>
     <p class="lead">Tell us about the student. Fields marked <span class="req">*</span> are required. The teacher will contact you on the mobile number you give.</p>
     <form method="post" action="{{ url_for('admission.apply') }}" class="form" data-once>
       {{ form.hidden_tag() }}

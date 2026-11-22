@@ -23,7 +23,7 @@
       <h1>Mathematics, taught until it makes sense.</h1>
       <p class="lead">Personal tuition for classes {{ site.classes }}. Learn in person in {{ site.location }} or join live online.</p>
       <div class="actions">
-        <a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a>
+        <a class="btn" href="{{ url_for('admission.apply') }}">Register for classes</a>
         {{ wa_button("Contact on WhatsApp") }}
       </div>
     </div>
@@ -46,7 +46,7 @@
 <section class="section tint">
   <div class="wrap">
     <h2>Classes and subjects</h2>
-    <p class="lead">Mathematics, from class 6 through class 12.</p>
+    <p class="lead">Mathematics for Classes 10–12 Learning support tailored to the academic level and concepts of each class.</p>
     <div class="bands">
       {% for range, name, text in site.class_bands %}
       <div class="band"><p class="band-range">{{ range }}</p><div><h3>{{ name }}</h3><p>{{ text }}</p></div></div>
@@ -111,7 +111,7 @@
     <div>
       <h2>Ready to start?</h2>
       <p class="lead">Send the admission form. It takes about three minutes.</p>
-      <p><a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a></p>
+      <p><a class="btn" href="{{ url_for('admission.apply') }}">Register for classes</a></p>
     </div>
     <div>
       <h2>Or talk first</h2>

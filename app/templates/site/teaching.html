@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "components/_macros.html" import sample_tag, wa_button with context %}
 {% block title %}Classes, subjects and timings, {{ site.name }}{% endblock %}
-{% block description %}Mathematics for classes 6 to 12, offline in {{ site.location }} and online. See classes taught, methodology and tuition timings.{% endblock %}
+{% block description %}Mathematics for classes 10 to 12, offline in {{ site.location }} and online. See classes taught, methodology and tuition timings.{% endblock %}
 {% block content %}
 <section class="section">
   <div class="wrap">
@@ -37,7 +37,7 @@
   <div class="wrap narrow">
     <h2>Learning support</h2>
     <p>Students can ask questions in class and by message. Share a doubt on WhatsApp and the teacher will respond when she is available.</p>
-    <p class="actions"><a class="btn" href="{{ url_for('admission.apply') }}">Apply for admission</a>{{ wa_button() }}</p>
+    <p class="actions"><a class="btn" href="{{ url_for('admission.apply') }}">Register for classes</a>{{ wa_button() }}</p>
   </div>
 </section>
 {% endblock %}
