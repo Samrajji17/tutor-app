@@ -13,17 +13,17 @@ bp = Blueprint("public", __name__)
 
 @bp.get("/")
 def home():
-    return render_template("public/home.html")
+    return render_template("site/home.html")
 
 
 @bp.get("/about")
 def about():
-    return render_template("public/about.html")
+    return render_template("site/about.html")
 
 
 @bp.get("/teaching")
 def teaching():
-    return render_template("public/teaching.html")
+    return render_template("site/teaching.html")
 
 
 @bp.route("/contact", methods=["GET", "POST"])
@@ -49,7 +49,7 @@ def contact():
             notify.new_message(message)
             flash("Thank you. Your message has been sent and the teacher will get back to you.", "success")
             return redirect(url_for(".contact") + "#contact-form")
-    return render_template("public/contact.html", form=form)
+    return render_template("site/contact.html", form=form)
 
 
 @bp.get("/robots.txt")

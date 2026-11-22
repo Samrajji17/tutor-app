@@ -20,11 +20,11 @@ def apply():
     form = AdmissionForm()
     if request.method == "GET":
         session["form_started"] = time.time()
-        return render_template("public/admission.html", form=form)
+        return render_template("site/admission.html", form=form)
 
     if not form.validate_on_submit():
         flash("Please fix the highlighted fields and submit again.", "error")
-        return render_template("public/admission.html", form=form)
+        return render_template("site/admission.html", form=form)
 
     if form.website.data:  # honeypot filled: pretend success, store nothing
         return redirect(url_for("public.home"))
@@ -33,10 +33,10 @@ def apply():
     started = session.get("form_started")
     if not ratelimit.allow(f"form:{request.remote_addr}", limit, window):
         flash("Too many submissions from this device. Please try again later.", "error")
-        return render_template("public/admission.html", form=form), 429
+        return render_template("site/admission.html", form=form), 429
     if started is None or time.time() - started < current_app.config["MIN_FORM_SECONDS"]:
         flash("That was very quick. Please review the form and submit again.", "error")
-        return render_template("public/admission.html", form=form)
+        return render_template("site/admission.html", form=form)
 
     mobile = clean_phone(form.mobile.data)
     # Prevent duplicates from double taps or refreshes: same student + number within 24 hours.
@@ -80,4 +80,4 @@ def success():
     reference = session.get("last_reference")
     if not reference:
         return redirect(url_for(".apply"))
-    return render_template("public/admission_success.html", reference=reference)
+    return render_template("site/admission_success.html", reference=reference)

@@ -53,7 +53,7 @@ app/
   routes/            public.py, admission.py, admin.py (blueprints)
   forms/             Flask-WTF forms and validation
   services/          email, references, rate limiting
-  templates/         public/, admin/, components/, errors/
+  templates/         site/, admin/, components/, errors/
   static/            css/, js/, images/
 config.py            settings from environment variables
 run.py               entry point
