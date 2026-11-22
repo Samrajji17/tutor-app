@@ -26,7 +26,7 @@ FEES = {
     }
 
 HIGHLIGHTS = [
-    ("M.Sc. Mathematics", "Subject expertise backed by postgraduate qualification, Teaching experience, Strong teaching philosophy."),
+    ("M.Sc. Mathematics", "Subject expertise backed by postgraduate qualification."),
     ("Small-batch learning", "A focused learning environment with up to 10 students per batch."),
     (" Online & Offline Options", "Students can choose between Online classes or In-person classes."),
 ]
